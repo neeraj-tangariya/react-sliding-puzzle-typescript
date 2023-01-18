@@ -33,7 +33,7 @@ function Tile(props) {
   return (
     <Motion style={motionStyle}>
       {({ translateX, translateY }) => (
-        <li
+        <div
           style={{
             ...tileStyle,
             transform: `translate3d(${translateX}px, ${translateY}px, 0)`,
@@ -46,7 +46,7 @@ function Tile(props) {
         >
           {/* {!imgUrl && `${tile + 1}`} */}
           {tile + 1}
-        </li>
+        </div>
       )}
     </Motion>
     // <li

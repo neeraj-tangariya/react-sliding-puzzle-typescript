@@ -7,7 +7,7 @@ function Board({ imgUrl }) {
   const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
 
   const [isStarted, setIsStarted] = useState(false);
-  
+
   const [moves, setMoves] = useState(0);
 
   console.log("is started:", isStarted);
@@ -32,8 +32,8 @@ function Board({ imgUrl }) {
   const handleTileClick = (index) => {
     if (!isSolved(tiles)) {
       swapTiles(index);
-    }else{
-      console.log('shuffled puzzle first')
+    } else {
+      console.log("shuffled puzzle first");
     }
   };
 
@@ -59,7 +59,7 @@ function Board({ imgUrl }) {
   return (
     <>
       <p>Moves: {moves} </p>
-      <ul style={style} className="board">
+      <div style={style} className="board">
         {tiles.map((tile, index) => (
           <Tile
             key={tile}
@@ -72,7 +72,7 @@ function Board({ imgUrl }) {
             isSolved={hasWon}
           />
         ))}
-      </ul>
+      </div>
       {hasWon && isStarted && <div>Puzzle solved 🧠 🎉</div>}
       {!isStarted ? (
         <button onClick={() => handleStartClick()}>Start game</button>
