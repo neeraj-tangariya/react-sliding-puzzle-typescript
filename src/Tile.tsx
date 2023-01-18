@@ -3,9 +3,18 @@ import { Motion, spring } from "react-motion";
 import { getMatrixPosition, getVisualPosition } from "./helpers";
 import { TILE_COUNT, GRID_SIZE, BOARD_SIZE } from "./constants";
 
-function Tile(props) {
-  const { tile, index, width, height, handleTileClick, imgUrl, isSolved } =
-    props;
+type TileProps = {
+  tile: number,
+  index: number,
+  width: number,
+  height: number,
+  handleTileClick: any,
+  imgUrl?: string,
+  isSolved: boolean
+}
+
+function Tile(props: TileProps) {
+  const { tile, index, width, height, handleTileClick, imgUrl, isSolved } = props;
 
   const { row, col } = getMatrixPosition(index);
 
@@ -20,9 +29,8 @@ function Tile(props) {
     translateY: visualPos.y,
     backgroundImage: `url(${imgUrl})`,
     backgroundSize: `${BOARD_SIZE}px`,
-    backgroundPosition: `${(100 / (GRID_SIZE - 1)) * (tile % GRID_SIZE)}% ${
-      (100 / (GRID_SIZE - 1)) * Math.floor(tile / GRID_SIZE)
-    }%`,
+    backgroundPosition: `${(100 / (GRID_SIZE - 1)) * (tile % GRID_SIZE)}% ${(100 / (GRID_SIZE - 1)) * Math.floor(tile / GRID_SIZE)
+      }%`,
   };
 
   const motionStyle = {
@@ -32,7 +40,7 @@ function Tile(props) {
 
   return (
     <Motion style={motionStyle}>
-      {({ translateX, translateY }) => (
+      {({ translateX, translateY }: any) => (
         <div
           style={{
             ...tileStyle,
@@ -49,20 +57,6 @@ function Tile(props) {
         </div>
       )}
     </Motion>
-    // <li
-    //   style={{
-    //     ...tileStyle,
-    //     transform: `translate3d(${visualPos.x}px, ${visualPos.y}px, 0)`,
-    //     // Is last tile?
-    //     // opacity: tile === TILE_COUNT - 1 ? 0 : 1,
-    //     opacity: tile === TILE_COUNT - 1 ? (isSolved ? 1 : 0) : 1,
-    //   }}
-    //   className="tile"
-    //   onClick={() => handleTileClick(index)}
-    // >
-    //   {/* {!imgUrl && `${tile + 1}`} */}
-    //   {tile + 1}
-    // </li>
   );
 }
 

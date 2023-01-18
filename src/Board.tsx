@@ -3,12 +3,16 @@ import Tile from "./Tile";
 import { TILE_COUNT, GRID_SIZE, BOARD_SIZE } from "./constants";
 import { canSwap, shuffle, swap, isSolved } from "./helpers";
 
-function Board({ imgUrl }) {
-  const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
+type BoardProps = {
+  imgUrl: string
+}
 
-  const [isStarted, setIsStarted] = useState(false);
+function Board({ imgUrl }: BoardProps) {
+  const [tiles, setTiles] = useState<any>([...Array(TILE_COUNT).keys()]);
 
-  const [moves, setMoves] = useState(0);
+  const [isStarted, setIsStarted] = useState<boolean>(false);
+
+  const [moves, setMoves] = useState<number>(0);
 
   console.log("is started:", isStarted);
 
@@ -17,7 +21,7 @@ function Board({ imgUrl }) {
     setTiles(shuffledTiles);
   };
 
-  const swapTiles = (tileIndex) => {
+  const swapTiles = (tileIndex: number) => {
     if (canSwap(tileIndex, tiles.indexOf(tiles.length - 1))) {
       const swappedTiles = swap(
         tiles,
@@ -29,7 +33,7 @@ function Board({ imgUrl }) {
     }
   };
 
-  const handleTileClick = (index) => {
+  const handleTileClick = (index: number) => {
     if (!isSolved(tiles)) {
       swapTiles(index);
     } else {
@@ -60,7 +64,7 @@ function Board({ imgUrl }) {
     <>
       <p>Moves: {moves} </p>
       <div style={style} className="board">
-        {tiles.map((tile, index) => (
+        {tiles.map((tile: number, index: number) => (
           <Tile
             key={tile}
             index={index}

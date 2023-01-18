@@ -3,17 +3,17 @@ import Board from "./Board";
 // import { updateURLParameter } from "./helpers"
 
 function App() {
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState<string>("");
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams: any = new URLSearchParams(window.location.search);
 
     if (urlParams.has("img")) {
       setImgUrl(urlParams.get("img"));
     }
   }, []);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: any) => {
     setImgUrl(e.target.value);
     // updateURLParameter(window.location.href, "img", e.target.value)
     // window.history.replaceState("", "", updateURLParameter(window.location.href, "img", e.target.value))

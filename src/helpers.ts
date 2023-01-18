@@ -1,7 +1,7 @@
 import { TILE_COUNT, GRID_SIZE } from "./constants"
 
 // Credits to https://codepen.io/unindented/pen/QNWdRQ
-export function isSolvable(tiles) {
+export function isSolvable(tiles: any) {
   let product = 1;
   for (let i = 1, l = TILE_COUNT - 1; i <= l; i++) {
     for (let j = i + 1, m = l + 1; j <= m; j++) {
@@ -11,7 +11,7 @@ export function isSolvable(tiles) {
   return Math.round(product) === 1;
 }
 
-export function isSolved(tiles) {
+export function isSolved(tiles: any) {
   for (let i = 0, l = tiles.length; i < l; i++) {
     if (tiles[i] !== i) {
       return false;
@@ -21,12 +21,12 @@ export function isSolved(tiles) {
 }
 
 // Get the linear index from a row/col pair.
-export function getIndex(row, col) {
+export function getIndex(row: string, col: string) {
   return parseInt(row, 10) * GRID_SIZE + parseInt(col, 10);
 }
 
 // Get the row/col pair from a linear index.
-export function getMatrixPosition(index) {
+export function getMatrixPosition(index: number) {
   // console.log(`index ${index} and grid ${GRID_SIZE}`,`row is ${(index / GRID_SIZE)} col is ${index % GRID_SIZE}`)
   return {
     row: Math.floor(index / GRID_SIZE),
@@ -34,18 +34,18 @@ export function getMatrixPosition(index) {
   };
 }
 
-export function getVisualPosition(row, col, width, height) {
+export function getVisualPosition(row: number, col: number, width: number, height: number) {
   return {
     x: col * width,
     y: row * height,
   };
 }
 
-export function shuffle(tiles) {
+export function shuffle(tiles: any): Array<[]> {
   // console.log('original tiles', tiles)
   const shuffledTiles = [
     ...tiles
-      .filter((t) => t !== tiles.length - 1)
+      .filter((t: number) => t !== tiles.length - 1)
       .sort(() => Math.random() - 0.5),
     tiles.length - 1,
   ];
@@ -59,7 +59,7 @@ export function shuffle(tiles) {
     : shuffle(shuffledTiles);
 }
 
-export function canSwap(srcIndex, destIndex) {
+export function canSwap(srcIndex: number, destIndex: number) {
   // console.log(getMatrixPosition(srcIndex))
   // console.log(getMatrixPosition(destIndex))
   const { row: srcRow, col: srcCol } = getMatrixPosition(srcIndex);
@@ -68,7 +68,7 @@ export function canSwap(srcIndex, destIndex) {
   return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
 }
 
-export function swap(tiles, src, dest) {
+export function swap(tiles: any, src: number, dest: number) {
   // console.log('current tilies', tiles)
   const tilesResult = [...tiles];
   [tilesResult[src], tilesResult[dest]] = [tilesResult[dest], tilesResult[src]];
@@ -76,7 +76,7 @@ export function swap(tiles, src, dest) {
   return tilesResult;
 }
 
-export function updateURLParameter(url, param, paramVal) {
+export function updateURLParameter(url: string, param: string, paramVal: string) {
   var newAdditionalURL = "";
   var tempArray = url.split("?");
   var baseURL = tempArray[0];
