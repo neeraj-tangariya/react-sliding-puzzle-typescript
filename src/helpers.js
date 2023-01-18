@@ -27,6 +27,7 @@ export function getIndex(row, col) {
 
 // Get the row/col pair from a linear index.
 export function getMatrixPosition(index) {
+  // console.log(`index ${index} and grid ${GRID_SIZE}`,`row is ${(index / GRID_SIZE)} col is ${index % GRID_SIZE}`)
   return {
     row: Math.floor(index / GRID_SIZE),
     col: index % GRID_SIZE,
@@ -41,26 +42,37 @@ export function getVisualPosition(row, col, width, height) {
 }
 
 export function shuffle(tiles) {
+  // console.log('original tiles', tiles)
   const shuffledTiles = [
     ...tiles
       .filter((t) => t !== tiles.length - 1)
       .sort(() => Math.random() - 0.5),
     tiles.length - 1,
   ];
+
+  // if you want simple shuffle 
+  // const shuffledTiles = [...tiles.sort(() => Math.random() - 0.5)]
+
+  // console.log('shuffled tiles', shuffledTiles)
   return isSolvable(shuffledTiles) && !isSolved(shuffledTiles)
     ? shuffledTiles
     : shuffle(shuffledTiles);
 }
 
 export function canSwap(srcIndex, destIndex) {
+  // console.log(getMatrixPosition(srcIndex))
+  // console.log(getMatrixPosition(destIndex))
   const { row: srcRow, col: srcCol } = getMatrixPosition(srcIndex);
   const { row: destRow, col: destCol } = getMatrixPosition(destIndex);
+  // console.log(Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol))
   return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
 }
 
 export function swap(tiles, src, dest) {
+  // console.log('current tilies', tiles)
   const tilesResult = [...tiles];
   [tilesResult[src], tilesResult[dest]] = [tilesResult[dest], tilesResult[src]];
+  // console.log('swapped tiles', tilesResult)
   return tilesResult;
 }
 
